@@ -8,9 +8,9 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import GatewayService from "../../../shared/api/services/gateway.service";
 import LoadingButton from "@mui/lab/LoadingButton";
-import "./styles.scss";
 import { dataFetchReducer } from "../../../shared/model/fetchReducer";
 import { Alert } from "@mui/material";
+import "./styles.scss";
 
 export const Create = () => {
   const [name, setName] = useState("");
@@ -25,9 +25,12 @@ export const Create = () => {
   const handleOpen = () => setIsOpenModal(true);
   const handleClose = () => {
     setIsOpenModal(false);
+    // setIP("");
+    // setName("");
     dispatch({ type: "FETCH_CLEAR", payload: null });
   };
 
+  // add reset list after create : key = {length from response}
   return (
     <>
       <Button onClick={handleOpen} variant="contained">

@@ -1,11 +1,11 @@
 import { useEffect, useReducer } from "react";
 import { dataFetchReducer } from "../../shared/model/fetchReducer";
 
-export const useDataApi = (initialData, callbackFetch) => {
+export const useDataApi = ({ data, isLoading = false }, callbackFetch) => {
   const [state, dispatch] = useReducer(dataFetchReducer, {
-    isLoading: false,
+    isLoading,
     isError: false,
-    data: initialData,
+    data,
   });
 
   useEffect(() => {

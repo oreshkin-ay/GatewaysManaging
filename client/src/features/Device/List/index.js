@@ -21,7 +21,7 @@ const SingleRow = ({ isLoading }) => {
   );
 };
 
-export const List = ({ data, isLoading, onShowDevices, onDeleteRow }) => {
+export const List = ({ data, isLoading, isError, onDeleteRow }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -36,7 +36,7 @@ export const List = ({ data, isLoading, onShowDevices, onDeleteRow }) => {
 
   return (
     <Box sx={{ p: 3 }}>
-      {isLoading && !data ? (
+      {isLoading && data === null ? (
         <Box className="loader">
           <CircularProgress />
         </Box>
@@ -44,13 +44,13 @@ export const List = ({ data, isLoading, onShowDevices, onDeleteRow }) => {
         <Paper sx={{ width: "100%", mb: 2 }}>
           <TableContainer>
             <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
-              <Head rowCount={data?.length ?? 0} />
+              <Head rowCount={data.length} />
               <TableBody
                 onClick={(e) => {
                   // debugger;
                 }}
               >
-                {!data?.length || isLoading ? (
+                {!data.length || isLoading ? (
                   <SingleRow isLoading={isLoading} />
                 ) : (
                   data.map(({ id, name, ip }) => {
@@ -61,7 +61,6 @@ export const List = ({ data, isLoading, onShowDevices, onDeleteRow }) => {
                         name={name}
                         ip={ip}
                         onDelete={onDeleteRow}
-                        onShowDevices={onShowDevices}
                       />
                     );
                   })

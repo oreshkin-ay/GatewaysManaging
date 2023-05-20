@@ -3,35 +3,35 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
-const headCells = [
+export const headCells = [
   {
     id: "id",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "ID",
   },
   {
     id: "name",
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: "Name",
   },
   {
     id: "ip",
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: "IP Address",
   },
 
   {
     id: "action",
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: "",
   },
 ];
 
-export const ListHead = () => (
+export const Head = () => (
   <TableHead>
     <TableRow>
       {headCells.map((headCell) => (
