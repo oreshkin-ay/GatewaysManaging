@@ -1,0 +1,25 @@
+.modal_content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 500px;
+  background-color: white;
+  border-radius: 4px;
+  padding: 20px;
+
+  &_fields {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+  }
+
+  &_actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.alert {
+  margin-bottom: 16px;
+}
