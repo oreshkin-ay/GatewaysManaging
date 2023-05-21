@@ -56,7 +56,6 @@ function App() {
         <Search
           value={search}
           onChange={({ target: { value } }) => {
-            console.log("2", value);
             setSearch(value);
             throttled(value);
           }}
