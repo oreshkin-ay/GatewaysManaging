@@ -7,17 +7,8 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 export const Row = ({ id, name, ip, onDelete, onShowDevices }) => {
   return (
-    <TableRow
-      hover
-      // onClick={(e) => {}}
-      data-id={id}
-      sx={{ cursor: "pointer" }}
-    >
-      <TableCell
-        component="th"
-        id={`enhanced-table-checkbox-${ip}`}
-        scope="row"
-      >
+    <TableRow hover data-id={id}>
+      <TableCell component="th" scope="row">
         {id}
       </TableCell>
       <TableCell>{name}</TableCell>

@@ -17,12 +17,17 @@ export const headCells = [
     label: "Name",
   },
   {
-    id: "ip",
+    id: "status",
     numeric: false,
     disablePadding: false,
-    label: "IP Address",
+    label: "Status",
   },
-
+  {
+    id: "date",
+    numeric: false,
+    disablePadding: false,
+    label: "Date",
+  },
   {
     id: "action",
     numeric: false,

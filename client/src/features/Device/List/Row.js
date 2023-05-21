@@ -1,37 +1,26 @@
 import React from "react";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import DnsIcon from "@mui/icons-material/Dns";
 import { IconButton, Tooltip } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import PhoneDisabledIcon from "@mui/icons-material/PhoneDisabled";
+import PhoneIcon from "@mui/icons-material/Phone";
 
-export const Row = ({ id, name, ip, onDelete }) => {
+export const Row = ({ id, name, status, date, onDelete }) => {
+  const localDate = new Date(date);
+
   return (
-    <TableRow
-      hover
-      // onClick={(e) => {}}
-      data-id={id}
-      sx={{ cursor: "pointer" }}
-    >
-      <TableCell
-        component="th"
-        id={`enhanced-table-checkbox-${ip}`}
-        scope="row"
-      >
+    <TableRow hover>
+      <TableCell component="th" scope="row">
         {id}
       </TableCell>
-      <TableCell>{name}</TableCell>
-      <TableCell>{ip}</TableCell>
+      <TableCell width="30%">{name}</TableCell>
+      <TableCell>{status ? <PhoneIcon /> : <PhoneDisabledIcon />}</TableCell>
+      <TableCell>{localDate.toLocaleString()}</TableCell>
       <TableCell align="right">
-        <Tooltip title="All devices">
-          <IconButton>
-            <DnsIcon />
-          </IconButton>
-        </Tooltip>
         <Tooltip title="Delete gateway">
           <IconButton
             onClick={(e) => {
-              e.stopPropagation();
               onDelete(id);
             }}
           >

@@ -5,15 +5,7 @@ module.exports = (app) => {
 
   router.post("/:id", device.create);
 
-  router.get("/", device.findAll);
-
-  router.get("/:id", device.findOne);
-
-  router.put("/:id", device.update);
-
   router.delete("/:id", device.delete);
-
-  router.delete("/", device.deleteAll);
 
   app.use("/api/device", router);
 };

@@ -3,9 +3,9 @@ module.exports = (app) => {
 
   var router = require("express").Router();
 
-  router.post("/", gateway.create);
-
   router.get("/", gateway.findAll);
+
+  router.post("/", gateway.create);
 
   router.get("/:id", gateway.findOne);
 

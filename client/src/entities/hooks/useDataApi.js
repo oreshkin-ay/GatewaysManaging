@@ -34,5 +34,5 @@ export const useDataApi = ({ data, isLoading = false }, callbackFetch) => {
     };
   }, [callbackFetch]);
 
-  return state;
+  return [state, dispatch];
 };

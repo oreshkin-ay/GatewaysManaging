@@ -23,7 +23,7 @@ exports.findAll = (req, res) => {
     ? { name: { $regex: new RegExp(name), $options: "i" } }
     : {};
 
-  Gateway.find(condition)
+  Gateway.find(condition, { devices: 0 })
     .then((data) => {
       // setTimeout(() => res.send(data), 2000);
       res.send(data);
@@ -40,12 +40,13 @@ exports.findOne = (req, res) => {
   const id = req.params.id;
 
   Gateway.findById(id)
+    .populate("devices")
     .then((data) => {
       if (!data)
         res.status(404).send({ message: "Not found Gateway with id " + id });
       else res.send(data);
     })
-    .catch((err) => {
+    .catch(() => {
       res
         .status(500)
         .send({ message: "Error retrieving Gateway with id=" + id });

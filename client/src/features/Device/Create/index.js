@@ -1,7 +1,5 @@
 import React, { useReducer, useState } from "react";
 
-// import Button from "@mui/material/Button";
-// import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
@@ -11,7 +9,7 @@ import { dataFetchReducer } from "../../../shared/model/fetchReducer";
 import { Alert, Switch } from "@mui/material";
 import "./styles.scss";
 
-export const Create = ({ id }) => {
+export const Create = ({ id, refetchList }) => {
   const [vendor, setVendor] = useState("");
   const [online, setOnline] = useState(false);
 
@@ -53,6 +51,7 @@ export const Create = ({ id }) => {
                 dispatch({ type: "FETCH_INIT" });
                 await DeviceService.create({ id, vendor, online });
                 dispatch({ type: "FETCH_CLEAR", payload: null });
+                refetchList();
               } catch (e) {
                 dispatch({ type: "FETCH_FAILURE" });
               }
