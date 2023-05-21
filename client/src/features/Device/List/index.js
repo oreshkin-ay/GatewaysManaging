@@ -36,13 +36,14 @@ export const List = ({ data, isLoading, onDeleteRow }) => {
                 {!data?.length || isLoading ? (
                   <SingleRow isLoading={isLoading} />
                 ) : (
-                  data.map(({ _id, vendor, online, updatedAt }) => (
+                  data.map(({ _id, vendor, uid, online, updatedAt }) => (
                     <Row
                       key={_id}
                       id={_id}
                       name={vendor}
                       status={online}
                       date={updatedAt}
+                      uid={uid}
                       onDelete={onDeleteRow}
                     />
                   ))

@@ -11,6 +11,12 @@ export const headCells = [
     label: "ID",
   },
   {
+    id: "UID",
+    numeric: false,
+    disablePadding: false,
+    label: "UID",
+  },
+  {
     id: "name",
     numeric: false,
     disablePadding: false,

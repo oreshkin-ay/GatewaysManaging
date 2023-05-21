@@ -6,13 +6,10 @@
 module.exports = (mongoose) => {
   var schema = mongoose.Schema(
     {
-      // uid: {
-      //   type: Number,
-      //   unique: true,
-      //   sparse: true,
-      //   required: true,
-      //   seq: 1,
-      // },
+      uid: {
+        type: Number,
+        seq: 0,
+      },
       vendor: {
         type: String,
         required: true,

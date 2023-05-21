@@ -6,7 +6,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import PhoneDisabledIcon from "@mui/icons-material/PhoneDisabled";
 import PhoneIcon from "@mui/icons-material/Phone";
 
-export const Row = ({ id, name, status, date, onDelete }) => {
+export const Row = ({ id, name, status, uid, date, onDelete }) => {
   const localDate = new Date(date);
 
   return (
@@ -14,6 +14,7 @@ export const Row = ({ id, name, status, date, onDelete }) => {
       <TableCell component="th" scope="row">
         {id}
       </TableCell>
+      <TableCell scope="row">{uid}</TableCell>
       <TableCell width="30%">{name}</TableCell>
       <TableCell>{status ? <PhoneIcon /> : <PhoneDisabledIcon />}</TableCell>
       <TableCell>{localDate.toLocaleString()}</TableCell>

@@ -2,19 +2,6 @@ const db = require("../models");
 const Device = db.device;
 const Gateway = db.gateway;
 
-// function getNextSequence(name) {
-//   var ret = Device.findByIdAndUpdate(
-//     { uid: -1 },
-//     {},
-//     {
-//       new: true,
-//       // upsert: true,
-//       update: { $inc: { seq: 1 } },
-//     }
-//   );
-//   return ret?.seq ?? 2;
-// }
-
 exports.create = async (req, res) => {
   try {
     const { id } = req.params;
@@ -27,9 +14,10 @@ exports.create = async (req, res) => {
       return res.status(400).json({ message: "Device limit exceeded." });
     }
 
+    const lastDevice = await Device.find().limit(1).sort({ uid: -1 });
     const newDevice = new Device({
       ...req.body,
-      // uid: req.body.uid,
+      uid: (lastDevice[0]?.uid ?? 0) + 1,
       gateway_id: id,
     });
 
