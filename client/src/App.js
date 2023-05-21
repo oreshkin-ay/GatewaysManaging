@@ -12,7 +12,7 @@ function App() {
   const [refetch, setRefetch] = useState({});
   const [search, setSearch] = useState("");
   const [gatewayInfo, setGatewayInfo] = useState({
-    id: "6468bc609a7d4b9cefc3a530",
+    id: "6469de48c0cca48bb7d194e1",
     name: "df",
   });
   // const [gatewayId, setGatewayInfoId] = useState(null);
@@ -22,7 +22,7 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, refetch]);
 
-  const { isLoading, data, isError } = useDataApi(
+  const [{ isLoading, data, isError }, dispatch] = useDataApi(
     { data: null, isLoading: true },
     getList
   );
@@ -43,9 +43,11 @@ function App() {
     }
   }, []);
 
-  console.log("gatewayId", gatewayInfo);
-
   const onCloseDevicesModal = useCallback(() => setGatewayInfo(null), []);
+
+  const handleSetError = useCallback(() => {
+    dispatch({ type: "FETCH_FAILURE" });
+  }, [dispatch]);
 
   return (
     <div className="App">
@@ -66,6 +68,7 @@ function App() {
           id={gatewayInfo?.id}
           name={gatewayInfo?.name}
           onClose={onCloseDevicesModal}
+          onSetError={handleSetError}
         />
       )}
       <Snackbar
