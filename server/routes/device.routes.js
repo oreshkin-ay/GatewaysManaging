@@ -9,5 +9,3 @@ module.exports = (app) => {
 
   app.use("/api/device", router);
 };
-
-// https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/

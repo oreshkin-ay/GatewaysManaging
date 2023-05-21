@@ -25,7 +25,6 @@ exports.findAll = (req, res) => {
 
   Gateway.find(condition, { devices: 0 })
     .then((data) => {
-      // setTimeout(() => res.send(data), 2000);
       res.send(data);
     })
     .catch((err) => {
