@@ -1,8 +1,3 @@
-// • a UID (number),
-// • vendor (string),
-// • date created,
-// • status - online/offline.
-
 module.exports = (mongoose) => {
   var schema = mongoose.Schema(
     {
