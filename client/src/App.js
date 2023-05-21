@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Button, Snackbar } from "@mui/material";
 
 import { Create as CreateGateway } from "./features/Gateway/Create";
@@ -6,19 +6,20 @@ import { List as GatewayList } from "./features/Gateway/List";
 import { useDataApi } from "./entities/hooks/useDataApi";
 import GatewayService from "./shared/api/services/gateway.service";
 import { Devices } from "./features/Devices";
-import "./App.css";
 import { Search } from "./features/Search";
+import { throttle } from "./shared/utils/throttle";
+import "./App.css";
 
 function App() {
   const [refetch, setRefetch] = useState({});
   const [search, setSearch] = useState("");
-
+  const [query, setQuery] = useState("");
   const [gatewayInfo, setGatewayInfo] = useState(null);
 
   const getList = useCallback(() => {
-    return GatewayService.getList(search);
+    return GatewayService.getList(query);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, refetch]);
+  }, [query, refetch]);
 
   const [{ isLoading, data, isError }, dispatch] = useDataApi(
     { data: null, isLoading: true },
@@ -47,13 +48,17 @@ function App() {
     dispatch({ type: "FETCH_FAILURE" });
   }, [dispatch]);
 
+  const throttled = useMemo(() => throttle(setQuery), []);
+
   return (
     <div className="App">
       <header className="header">
         <Search
           value={search}
-          onChange={({ target }) => {
-            setSearch(target.value);
+          onChange={({ target: { value } }) => {
+            console.log("2", value);
+            setSearch(value);
+            throttled(value);
           }}
         />
       </header>
