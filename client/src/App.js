@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Snackbar } from "@mui/material";
+import { Button, Snackbar } from "@mui/material";
 
 import { Create as CreateGateway } from "./features/Gateway/Create";
 import { List as GatewayList } from "./features/Gateway/List";
@@ -7,14 +7,12 @@ import { useDataApi } from "./entities/hooks/useDataApi";
 import GatewayService from "./shared/api/services/gateway.service";
 import { Devices } from "./features/Devices";
 import "./App.css";
+import { Search } from "./features/Search";
 
 function App() {
   const [refetch, setRefetch] = useState({});
   const [search, setSearch] = useState("");
-  // const [gatewayInfo, setGatewayInfo] = useState({
-  //   id: "6469de48c0cca48bb7d194e1",
-  //   name: "df",
-  // });
+
   const [gatewayInfo, setGatewayInfo] = useState(null);
 
   const getList = useCallback(() => {
@@ -51,9 +49,31 @@ function App() {
 
   return (
     <div className="App">
-      <header>header</header>
+      <header className="header">
+        <Search
+          value={search}
+          onChange={({ target }) => {
+            setSearch(target.value);
+          }}
+        />
+      </header>
       <main>
-        <CreateGateway onRefetch={setRefetch} />
+        <div>
+          <CreateGateway onRefetch={setRefetch} />
+          <Button
+            onClick={async () => {
+              try {
+                await GatewayService.deleteAll();
+                setRefetch({});
+              } catch {
+                handleSetError();
+              }
+            }}
+            variant="contained"
+          >
+            Delete All
+          </Button>
+        </div>
         <GatewayList
           isLoading={isLoading}
           onDeleteRow={handleDeleteGateway}
