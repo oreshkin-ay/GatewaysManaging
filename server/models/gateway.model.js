@@ -1,7 +1,4 @@
-// • a unique serial number (string),
-// • human-readable name (string),
-// • IPv4 address (to be validated),
-// • multiple associated peripheral devices.
+const net = require('node:net');
 
 module.exports = (mongoose) => {
   const schema = mongoose.Schema(
@@ -9,21 +6,20 @@ module.exports = (mongoose) => {
       name: {
         type: String,
         required: true,
-        // index: true,
+        index: true,
         unique: true,
         sparse: true,
       },
       ip: {
         type: String,
         required: true,
-        // index: true,
         unique: true,
         sparse: true,
         validate: {
           validator: function (value) {
-            return true;
+            return net.isIPv4(value);
           },
-          message: "Invalid",
+          message: "It's not IPv4",
         },
       },
       devices: [

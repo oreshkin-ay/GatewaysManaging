@@ -12,7 +12,7 @@ import GatewayService from "../../../shared/api/services/gateway.service";
 import { dataFetchReducer } from "../../../shared/model/fetchReducer";
 import "./styles.scss";
 
-export const Create = () => {
+export const Create = ({ onRefetch }) => {
   const [name, setName] = useState("");
   const [ip, setIP] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -25,8 +25,8 @@ export const Create = () => {
   const handleOpen = () => setIsOpenModal(true);
   const handleClose = () => {
     setIsOpenModal(false);
-    // setIP("");
-    // setName("");
+    setIP("");
+    setName("");
     dispatch({ type: "FETCH_CLEAR", payload: null });
   };
 
@@ -102,6 +102,7 @@ export const Create = () => {
                     dispatch({ type: "FETCH_INIT" });
                     await GatewayService.create({ name, ip });
                     handleClose();
+                    onRefetch({});
                   } catch (e) {
                     dispatch({ type: "FETCH_FAILURE" });
                   }

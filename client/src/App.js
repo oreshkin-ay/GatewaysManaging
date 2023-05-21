@@ -11,11 +11,11 @@ import "./App.css";
 function App() {
   const [refetch, setRefetch] = useState({});
   const [search, setSearch] = useState("");
-  const [gatewayInfo, setGatewayInfo] = useState({
-    id: "6469de48c0cca48bb7d194e1",
-    name: "df",
-  });
-  // const [gatewayId, setGatewayInfoId] = useState(null);
+  // const [gatewayInfo, setGatewayInfo] = useState({
+  //   id: "6469de48c0cca48bb7d194e1",
+  //   name: "df",
+  // });
+  const [gatewayInfo, setGatewayInfo] = useState(null);
 
   const getList = useCallback(() => {
     return GatewayService.getList(search);
@@ -53,7 +53,7 @@ function App() {
     <div className="App">
       <header>header</header>
       <main>
-        <CreateGateway />
+        <CreateGateway onRefetch={setRefetch} />
         <GatewayList
           isLoading={isLoading}
           onDeleteRow={handleDeleteGateway}
