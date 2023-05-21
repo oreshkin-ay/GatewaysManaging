@@ -45,6 +45,8 @@ function App() {
 
   console.log("gatewayId", gatewayInfo);
 
+  const onCloseDevicesModal = useCallback(() => setGatewayInfo(null), []);
+
   return (
     <div className="App">
       <header>header</header>
@@ -58,11 +60,14 @@ function App() {
           onShowDevices={useCallback((data) => setGatewayInfo(data), [])}
         />
       </main>
-      <Devices
-        id={gatewayInfo?.id}
-        name={gatewayInfo?.name}
-        onClose={useCallback(() => setGatewayInfo(null), [])}
-      />
+
+      {!!gatewayInfo?.id && (
+        <Devices
+          id={gatewayInfo?.id}
+          name={gatewayInfo?.name}
+          onClose={onCloseDevicesModal}
+        />
+      )}
       <Snackbar
         open={isGeneralError}
         autoHideDuration={3000}

@@ -3,7 +3,7 @@ module.exports = (app) => {
 
   var router = require("express").Router();
 
-  router.post("/", device.create);
+  router.post("/:id", device.create);
 
   router.get("/", device.findAll);
 

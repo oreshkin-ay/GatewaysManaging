@@ -1,20 +1,45 @@
 const db = require("../models");
 const Device = db.device;
+const Gateway = db.gateway;
 
-exports.create = (req, res) => {
-  const device = new Device(req.body);
+// function getNextSequence(name) {
+//   var ret = Device.findByIdAndUpdate(
+//     { uid: -1 },
+//     {},
+//     {
+//       new: true,
+//       // upsert: true,
+//       update: { $inc: { seq: 1 } },
+//     }
+//   );
+//   return ret?.seq ?? 2;
+// }
 
-  device
-    .save(device)
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(400).send({
-        message:
-          err.message || "Some error occurred while creating the Device.",
-      });
+exports.create = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const gateway = await Gateway.findById(id);
+    if (gateway == null) {
+      return res.status(404).json({ message: "Gateway doesn't exist." });
+    }
+
+    if (gateway.devices.length === 10) {
+      return res.status(400).json({ message: "Device limit exceeded." });
+    }
+
+    const newDevice = new Device({
+      ...req.body,
+      // uid: req.body.uid,
+      gateway: id,
     });
+
+    const device = await newDevice.save();
+    gateway.devices.push(device._id);
+    await gateway.save();
+    res.send(device);
+  } catch (e) {
+    return res.status(400).json({ message: e.message });
+  }
 };
 
 exports.findAll = (req, res) => {
@@ -30,8 +55,7 @@ exports.findAll = (req, res) => {
     })
     .catch((err) => {
       res.status(400).send({
-        message:
-          err.message || "Some error occurred while retrieving device.",
+        message: err.message || "Some error occurred while retrieving device.",
       });
     });
 };

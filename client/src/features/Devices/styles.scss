@@ -1,4 +1,4 @@
-.modal_content {
+.devices_modal_content {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -7,6 +7,10 @@
   background-color: white;
   border-radius: 4px;
   padding: 20px;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   &_fields {
     align-items: flex-end;
@@ -16,6 +20,9 @@
   &_actions {
     display: flex;
     justify-content: flex-end;
+  }
+  & .title {
+    margin-bottom: 16px;
   }
 }
 

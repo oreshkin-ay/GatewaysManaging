@@ -1,15 +1,15 @@
 import React, { useReducer, useState } from "react";
-
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
-import GatewayService from "../../../shared/api/services/gateway.service";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { dataFetchReducer } from "../../../shared/model/fetchReducer";
 import { Alert } from "@mui/material";
+
+import GatewayService from "../../../shared/api/services/gateway.service";
+import { dataFetchReducer } from "../../../shared/model/fetchReducer";
 import "./styles.scss";
 
 export const Create = () => {
@@ -53,16 +53,16 @@ export const Create = () => {
         aria-describedby="modal-modal-description"
       >
         <Box
-          className="modal_content"
+          className="gateway_modal_content"
           component="form"
           noValidate
           autoComplete="off"
         >
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography variant="h6" component="h2">
             New gateway
           </Typography>
 
-          <div className="modal_content_fields">
+          <div className="gateway_modal_content_fields">
             <Stack direction="row" spacing={2}>
               <TextField
                 className="margin"
@@ -89,7 +89,7 @@ export const Create = () => {
             </Alert>
           )}
 
-          <div className="modal_content_actions">
+          <div className="gateway_modal_content_actions">
             <Stack direction="row" spacing={2}>
               <Button className="margin" onClick={handleClose}>
                 Cancel
