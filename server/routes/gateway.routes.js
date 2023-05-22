@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const gateway = require("../controllers/gateway.controller.js");
 
-  var router = require("express").Router();
+  const router = require("express").Router();
 
   router.get("/", gateway.findAll);
 

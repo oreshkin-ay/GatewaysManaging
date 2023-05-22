@@ -19,7 +19,7 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
   const { name } = req.query;
-  var condition = name
+  const condition = name
     ? { name: { $regex: new RegExp(name), $options: "i" } }
     : {};
 
