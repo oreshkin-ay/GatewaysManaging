@@ -1,7 +1,7 @@
 # Gateways management
 
-Backend: NodeJS, Express, MongoDB
-Frontend: React, Material-UI
+- Backend: NodeJS, Express, MongoDB
+- Frontend: React, Material-UI
 
 Run dev:
 1) docker-compose up
