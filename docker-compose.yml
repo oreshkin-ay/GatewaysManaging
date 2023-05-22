@@ -1,30 +1,7 @@
-version: '3.8'
-
-# version: '3'
-# services:
-#   node:
-#     build:
-#       context: .
-#     command: npm run dev
-#     ports:
-#       - 80:3000
-#     volumes:
-#       - ./:/app
-#     env_file:
-#       - .env
-#     depends_on:
-#       - mongo
-#   mongo:
-#     image: mongo
-#     restart: always
-#     ports:
-#       - 27017:27017
-#    volumes:
-#      - mongodb:/data/db
+version: '3'
 
 services:
   mongodb:
-    # image: mongo:5.0.2
     image: mongo
     restart: unless-stopped
     env_file: ./.env

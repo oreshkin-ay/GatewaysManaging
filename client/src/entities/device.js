@@ -14,10 +14,6 @@ export const CreateGateway = () => {
   const handleOpen = () => setIsOpenModal(true);
   const handleClose = () => setIsOpenModal(false);
 
-  // • a unique serial number (string),
-  // • human-readable name (string),
-  // • IPv4 address (to be validated),
-  // • multiple associated peripheral devices.
   return (
     <>
       <Button onClick={handleOpen} variant="contained">
