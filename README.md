@@ -1,4 +1,4 @@
-# GatewaysManaging
+# Gateways management
 
 Backend: NodeJS, Express, MongoDB
 Frontend: React, Material-UI
