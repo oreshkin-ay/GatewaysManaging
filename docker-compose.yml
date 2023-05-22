@@ -1,0 +1,73 @@
+version: '3.8'
+
+# version: '3'
+# services:
+#   node:
+#     build:
+#       context: .
+#     command: npm run dev
+#     ports:
+#       - 80:3000
+#     volumes:
+#       - ./:/app
+#     env_file:
+#       - .env
+#     depends_on:
+#       - mongo
+#   mongo:
+#     image: mongo
+#     restart: always
+#     ports:
+#       - 27017:27017
+#    volumes:
+#      - mongodb:/data/db
+
+services:
+  mongodb:
+    # image: mongo:5.0.2
+    image: mongo
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
+    volumes:
+      - db:/data/db
+    networks:
+      - backend
+
+  server:
+    depends_on:
+      - mongodb
+    build: ./server
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    environment:
+      - DB_HOST=mongodb
+      - DB_NAME=$MONGODB_DATABASE
+      - DB_PORT=$MONGODB_DOCKER_PORT
+      - CLIENT_ORIGIN=$CLIENT_ORIGIN
+    networks:
+      - backend
+      - frontend
+
+  client:
+    depends_on:
+      - server
+    build:
+      context: ./client
+      args:
+        - REACT_APP_API_BASE_URL=$CLIENT_API_BASE_URL
+    ports:
+      - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
+    networks:
+      - frontend
+
+volumes:
+  db:
+
+
+networks:
+  backend:
+  frontend:

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const db = require("./models");
@@ -5,7 +6,8 @@ const db = require("./models");
 const app = express();
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  // origin: "http://localhost:3000",
+  origin: process.env.CLIENT_ORIGIN || "http://localhost:3000"
 };
 
 app.use(cors(corsOptions));
@@ -34,7 +36,7 @@ app.get("/", (req, res) => {
 });
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.NODE_DOCKER_PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
